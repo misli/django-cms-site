@@ -1,0 +1,20 @@
+#!/bin/bash
+
+# run django-cms migrate on first boot (unless AUTO_MIGRATE=0|n|no|f|false)
+if [[ ! "${AUTO_MIGRATE,,}" =~ ^(0|n|no|f|false)$ ]] && [ ! -e .migrated ]; then
+    su -s /bin/bash -c 'django-cms migrate --no-input' www-data && touch .migrated
+fi
+
+# ensure ownership of likely mounted directory
+chown www-data:www-data data htdocs/media run
+
+# run uwsgi server
+exec uwsgi --chdir=/app \
+    --uid=${UWSGI_UID:-www-data} --gid=${UWSGI_GID:-www-data} \
+    --module=${UWSGI_MODULE:-cms_site.wsgi:application} \
+    --master \
+    --enable-threads \
+    --socket=${UWSGI_SOCKET:-/app/run/socket} \
+    --chmod-socket=${UWSGI_CHMOD_SOCKET:-600} \
+    --processes=${UWSGI_PROCESSES:-3} \
+    ${UWSGI_OPTIONS}

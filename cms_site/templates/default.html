@@ -1,0 +1,19 @@
+{% load i18n bootstrap_tags cms_tags menu_tags sekizai_tags staticfiles ganalytics %}
+
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <title>{% block page_title %}{% page_attribute "page_title" %}{% endblock %}</title>
+    {% render_block "css" %}
+  </head>
+
+  <body>
+    {% cms_toolbar %}
+
+    <h1>{% block title %}{% page_attribute "title" %}{% endblock %}</h1>
+
+    {% block content %}{% placeholder "content" %}{% endblock %}
+
+    {% render_block "js" %}
+  </body>
+</html>

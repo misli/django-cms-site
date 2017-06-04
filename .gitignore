@@ -1,0 +1,12 @@
+*.pyc
+*.pyo
+*.egg-info
+*.swp
+*~
+/build
+/data
+/dist
+/env
+/htdocs
+/.coverage
+/.tox

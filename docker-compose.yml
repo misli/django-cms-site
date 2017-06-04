@@ -1,0 +1,43 @@
+version: '2'
+services:
+
+  cms:
+    image: misli/django-cms-site
+    depends_on:
+      - memcached
+      - db
+    links:
+      - memcached
+    environment:
+      DATABASE_ENGINE: django.db.backends.mysql
+      DATABASE_HOST: ''
+      DATABASE_NAME: django_cms
+      DATABASE_PASSWORD: django_cms_password
+      DATABASE_USER: django_cms
+      MEMCACHED_LOCATION: memcached:11211
+      DEBUG: template
+    volumes:
+      - /app/run
+      - ./data:/app/data:z
+      - ./htdocs/media:/app/htdocs/media:z
+    volumes_from:
+      - db
+    ports:
+      - 127.0.0.1:8000:80
+    restart: unless-stopped
+
+  db:
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: django_cms
+      MYSQL_PASSWORD: django_cms_password
+      MYSQL_ROOT_PASSWORD: django_cms_root_password
+      MYSQL_USER: django_cms
+    volumes:
+      - /var/run/mysqld
+      - ./mysql:/var/lib/mysql:z
+    restart: unless-stopped
+
+  memcached:
+    image: memcached
+    restart: unless-stopped

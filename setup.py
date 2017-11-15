@@ -16,7 +16,7 @@ with open(os.path.join(os.path.dirname(__file__), 'requirements.txt')) as requir
 
 setup(
     name='django-cms-site',
-    version='1.0.4',
+    version='1.1.0',
     description='Default Django CMS site suitable for Docker',
     long_description=long_description,
     author='Jakub Dorňák',

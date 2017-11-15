@@ -78,7 +78,7 @@ INSTALLED_APPS = [
     'raven.contrib.django.raven_compat',
 ]
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
     'cms.middleware.utils.ApphookReloadMiddleware',
     'django.middleware.security.SecurityMiddleware',
@@ -96,7 +96,7 @@ MIDDLEWARE_CLASSES = [
     'cms.middleware.language.LanguageCookieMiddleware',
 ]
 
-ROOT_URLCONF = 'cms_site.urls'
+ROOT_URLCONF = os.environ.get('ROOT_URLCONF', 'cms_site.urls')
 
 TEMPLATES = [
     {
@@ -132,7 +132,7 @@ if DEBUG_TEMPLATE:
     del TEMPLATES[0]['OPTIONS']['loaders']
     TEMPLATES[0]['APP_DIRS'] = True
 
-WSGI_APPLICATION = 'cms_site.wsgi.application'
+WSGI_APPLICATION = os.environ.get('UWSGI_MODULE', 'cms_site.wsgi:application').replace(':', '.')
 
 
 # Database

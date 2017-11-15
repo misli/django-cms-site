@@ -1,6 +1,6 @@
-# Requirements of django-cms
+# Requirements of django-cms-site
 Django<1.11
-PyPDF2
+aldryn-bootstrap3
 cmsplugin-filer
 django-cms<3.5
 django-cms-articles
@@ -23,6 +23,4 @@ mysqlclient
 psycopg2
 python-memcached
 raven
-social-auth-app-django
-trml2pdf
 uwsgi

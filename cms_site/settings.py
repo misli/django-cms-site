@@ -78,8 +78,7 @@ INSTALLED_APPS = [
     'raven.contrib.django.raven_compat',
 ]
 
-MIDDLEWARE = [
-    'raven.contrib.django.raven_compat.middleware.Sentry404CatchMiddleware',
+MIDDLEWARE_CLASSES = [
     'cms.middleware.utils.ApphookReloadMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -115,7 +114,6 @@ TEMPLATES = [
                 'django.template.context_processors.static',
                 'sekizai.context_processors.sekizai',
                 'cms.context_processors.cms_settings',
-                'cms_articles.context_processors.cms_articles',
             ],
             'loaders': [
                 ('django.template.loaders.cached.Loader', [
@@ -215,7 +213,7 @@ STATICFILES_FINDERS = [
     'staticfiles_downloader.DownloaderFinder',
 ]
 
-# Static files (CSS, JavaScript, Images)
+# Logging
 # https://docs.djangoproject.com/en/1.10/topics/logging/
 
 LOGGING = {
@@ -294,7 +292,7 @@ EMAIL_HOST = os.environ.get('EMAIL_HOST', 'localhost')
 EMAIL_PORT = int(os.environ.get('EMAIL_PORT', '25'))
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-EMAIL_SUBJECT_PREFIX = os.environ.get('EMAIL_SUBJECT_PREFIX', '[djangoCMS] ')
+EMAIL_SUBJECT_PREFIX = os.environ.get('EMAIL_SUBJECT_PREFIX', '[djangoCMS]').strip() + ' '
 
 # CMS configuration
 # http://djangocms.readthedocs.io/en/latest/reference/configuration/

@@ -1,0 +1,26 @@
+# Requirements of django-cms-site
+Django<1.11
+aldryn-bootstrap3
+cmsplugin-filer
+django-cms
+django-cms-articles
+django-countries
+django-filer
+django-ganalytics
+django-haystack
+django-localflavor<2
+django-staticfiles-downloader
+django-verified-email-field
+djangocms-column
+djangocms-googlemap
+djangocms-link
+djangocms-snippet
+djangocms-style
+djangocms-text-ckeditor
+djangocms-video
+ipython
+mysqlclient
+psycopg2
+python-memcached
+raven
+uwsgi

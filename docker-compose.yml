@@ -1,30 +1,29 @@
-version: '2'
+version: '3.4'
 services:
 
   cms:
-    image: misli/django-cms-site
+    image: misli/django-cms-site:testing
     depends_on:
-      - memcached
       - db
-    links:
       - memcached
     environment:
+      DEBUG: TEMPLATE
+      SECRET_KEY: secretkey
       DATABASE_ENGINE: django.db.backends.mysql
       DATABASE_HOST: ''
       DATABASE_NAME: django_cms
       DATABASE_PASSWORD: django_cms_password
       DATABASE_USER: django_cms
       MEMCACHED_LOCATION: memcached:11211
-      DEBUG: template
-    volumes:
-      - /app/run
-      - ./data:/app/data:z
-      - ./htdocs/media:/app/htdocs/media:z
-    volumes_from:
-      - db
     ports:
-      - 127.0.0.1:8000:80
+      - 127.0.0.1:80:80
     restart: unless-stopped
+    volumes:
+      - ./.ipython:/root/.ipython:z
+      - ./cms_site:/app/cms_site:ro
+      - ./data:/app/data:z
+      - ./media:/app/htdocs/media:z
+      - db:/var/run/mysqld:z
 
   db:
     image: mariadb
@@ -33,11 +32,18 @@ services:
       MYSQL_PASSWORD: django_cms_password
       MYSQL_ROOT_PASSWORD: django_cms_root_password
       MYSQL_USER: django_cms
-    volumes:
-      - /var/run/mysqld
-      - ./mysql:/var/lib/mysql:z
+    ports:
+      - 127.0.0.1:3306:3306
     restart: unless-stopped
+    volumes:
+      - db:/var/run/mysqld:z
+      - ./mysql:/var/lib/mysql:z
 
   memcached:
     image: memcached
+    ports:
+      - 127.0.0.1:11211:11211
     restart: unless-stopped
+
+volumes:
+  db:

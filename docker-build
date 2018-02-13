@@ -1,3 +1,14 @@
 #!/bin/bash
 
-exec docker build "$@" --tag misli/django-cms-site .
+# choose image tag
+if git symbolic-ref HEAD | grep -q refs/heads/master; then
+    TAG=latest
+else
+    TAG=testing
+fi
+
+if [ -w /var/run/docker.sock ]; then
+    exec docker build "$@" --tag misli/django-cms-site:$TAG .
+else
+    exec sudo docker build "$@" --tag misli/django-cms-site:$TAG .
+fi

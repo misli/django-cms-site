@@ -213,6 +213,8 @@ STATICFILES_FINDERS = [
     'staticfiles_downloader.DownloaderFinder',
 ]
 
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')] if os.path.exists(os.path.join(BASE_DIR, 'locale')) else []
+
 # Logging
 # https://docs.djangoproject.com/en/1.10/topics/logging/
 

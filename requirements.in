@@ -1,5 +1,5 @@
 # Requirements of django-cms-site
-Django<1.11
+Django<1.10
 aldryn-bootstrap3
 cmsplugin-filer
 django-cms

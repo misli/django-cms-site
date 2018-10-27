@@ -75,6 +75,7 @@ INSTALLED_APPS = [
     'djangocms_video',
     'ganalytics',
     'raven.contrib.django.raven_compat',
+    'template_admin',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -115,9 +116,11 @@ TEMPLATES = [
                 'cms.context_processors.cms_settings',
             ],
             'loaders': [
-                ('django.template.loaders.cached.Loader', [
-                    'django.template.loaders.filesystem.Loader',
-                    'django.template.loaders.app_directories.Loader',
+                ('template_admin.loader.Loader', [
+                    ('django.template.loaders.cached.Loader', [
+                        'django.template.loaders.filesystem.Loader',
+                        'django.template.loaders.app_directories.Loader',
+                    ]),
                 ]),
             ]
         },

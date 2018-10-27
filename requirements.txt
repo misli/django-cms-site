@@ -23,6 +23,7 @@ django-mptt==0.8.7        # via django-filer
 django-polymorphic==2.0.3  # via django-filer
 django-sekizai==0.10.0    # via cmsplugin-filer, django-cms
 django-staticfiles-downloader==0.1.5
+django-template-admin==1.0.2
 django-treebeard==4.3     # via django-cms
 django-verified-email-field==1.5.1
 django==1.11.16

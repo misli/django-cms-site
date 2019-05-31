@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+    <title>System startup</title>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+            crossorigin="anonymous"></script>
+
+    <style type="text/css">
+        .loader {
+            border: 16px solid lightblue;
+            border-top: 16px solid blue;
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            margin: 150px auto;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loader"></div>
+
+    <script type="text/javascript">
+    <!--
+
+function condRedirect() {
+    $.ajax({
+        type: "HEAD",
+        async: true,
+        url: window.location.href,
+    }).done(function(message, text, jqXHR) {
+        window.location.reload();
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+        window.setTimeout(condRedirect, 3000);
+    });
+}
+window.setTimeout(condRedirect, 3000);
+
+    -->
+    </script>
+</body>
+
+</html>

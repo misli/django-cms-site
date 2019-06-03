@@ -2,12 +2,12 @@ version: '3.4'
 services:
 
   cms:
-    image: misli/django-cms-site:testing
+    image: misli/django-cms-site
+    build: .
     depends_on:
       - db
       - memcached
     environment:
-      DEBUG: TEMPLATE
       SECRET_KEY: secretkey
       DATABASE_ENGINE: django.db.backends.mysql
       DATABASE_HOST: ''
@@ -17,13 +17,11 @@ services:
       MEMCACHED_LOCATION: memcached:11211
     ports:
       - 127.0.0.1:80:80
-    restart: unless-stopped
     volumes:
-      - ./.ipython:/root/.ipython:z
-      - ./cms_site:/app/cms_site:ro
-      - ./data:/app/data:z
-      - ./media:/app/htdocs/media:z
-      - db:/var/run/mysqld:z
+      - ./.ipython:/root/.ipython
+      - ./data:/app/data
+      - ./media:/app/htdocs/media
+      - db:/var/run/mysqld
 
   db:
     image: mariadb
@@ -34,16 +32,12 @@ services:
       MYSQL_USER: django_cms
     ports:
       - 127.0.0.1:3306:3306
-    restart: unless-stopped
     volumes:
-      - db:/var/run/mysqld:z
-      - ./mysql:/var/lib/mysql:z
+      - db:/var/run/mysqld
+      - ./mysql:/var/lib/mysql
 
   memcached:
     image: memcached
-    ports:
-      - 127.0.0.1:11211:11211
-    restart: unless-stopped
 
 volumes:
   db:

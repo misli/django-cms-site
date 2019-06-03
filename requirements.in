@@ -20,7 +20,7 @@ djangocms-text-ckeditor
 djangocms-video
 ipython
 mysqlclient
-psycopg2
+psycopg2-binary
 python-memcached
 raven
 uwsgi
